@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ed2355d-1fcb-4caf-a96e-f11aed19407d" name="Changes" comment="Display an inventory from a csv!">
+    <list default="true" id="0ed2355d-1fcb-4caf-a96e-f11aed19407d" name="Changes" comment="Working on forming the searches!">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/SearchInventoryMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/SearchInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/SearchInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/inventory.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/inventory.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +49,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.SearchInventory.executor": "Run",
+    "Application.SearchInventoryMap.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
@@ -56,6 +59,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Student\pluralsight\workbook-3\SearchInventory\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pluralsight" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -91,7 +97,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759937020814</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Working on forming the searches!">
+      <option name="closed" value="true" />
+      <created>1759939213045</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759939213045</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -101,6 +115,7 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="We can print our humble inventory" />
     <MESSAGE value="Display an inventory from a csv!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Display an inventory from a csv!" />
+    <MESSAGE value="Working on forming the searches!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working on forming the searches!" />
   </component>
 </project>

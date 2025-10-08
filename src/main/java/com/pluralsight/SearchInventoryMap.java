@@ -1,11 +1,14 @@
 package com.pluralsight;
 
-import java.io.*;
-import java.sql.SQLOutput;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class SearchInventory {
+public class SearchInventoryMap {
 
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
@@ -16,10 +19,12 @@ public class SearchInventory {
             BufferedWriter buffWriter = new BufferedWriter(fileWriter);
 
 
+            HashMap<String,Product> inventoryMap = loadInventory();
             ArrayList<Product> inventory = getInventory();
+
             System.out.println("== Welcome to Leomund's Tiny Hardware Hut! == ");
             while(true) {
-                System.out.print("What would you like to do?\n[1] Display All Products\n[2] Product ID Look-Up\n[3] Search by Price Range\n[4] Add a New Product\n[5] Exit the Program\n======\nType Here: ");
+                System.out.print("What would you like to do?\n[1] Display All Products\n[2] Product ID Look-Up\n[3] Search by Name\n[4] Search by Price Range\n[5] Add a New Product\n[6] Exit the Program\n======\nType Here: ");
                 int choice = keyboard.nextInt();
                 keyboard.nextLine(); //CRLF
 
@@ -28,9 +33,10 @@ public class SearchInventory {
                     //display all
                     case 1:
                         System.out.println("==== Current Inventory ====");
+
                         for (int i = 0; i < inventory.size(); i++) {
                             Product product = inventory.get(i);
-                            System.out.printf("%d|%s|$%.2f\n", product.getId(), product.getName(), product.getPrice());
+                            displayProduct(product);
                         }
                         System.out.println("===========================");
                         break;
@@ -43,8 +49,31 @@ public class SearchInventory {
 
                         idLookup(inventory,idLookUp);
                         break;
-                    //Price Range
+                        //Name
                     case 3:
+                        System.out.println("=== Product Lookup by Name ===\n");
+                        boolean keepGoing=true;
+                        while(keepGoing){
+                            System.out.print("Please enter exact Product Name: ");
+                            String nameLookUp= keyboard.nextLine().trim().toLowerCase();
+                            System.out.printf("Searching for %s...\n",nameLookUp);
+                            if(inventoryMap.containsKey(nameLookUp)){
+                                displayProduct(inventoryMap.get(nameLookUp));
+                            }
+                            System.out.print("Do you want to search another product?\n[Y] Yes [N] No\nType Here: ");
+                            String searchAgain = keyboard.nextLine().trim().toUpperCase();
+
+                            switch(searchAgain){
+                                case "N":
+                                    keepGoing = false;
+                                    break;
+                            }
+
+                        }
+
+                        break;
+                    //Price Range
+                    case 4:
                         System.out.println("=== Lookup by Price Range ===\n");
                         System.out.print("Enter the lowest price: ");
                         double startRange = keyboard.nextDouble();
@@ -58,17 +87,17 @@ public class SearchInventory {
 
                         break;
                     //Add new
-                    case 4:
+                    case 5:
                         System.out.println("=== Add a Product ===\n");
 
                         boolean another = true;
                         while (another) {
-                            System.out.print("\nEnter the 4-digit ID for the Product: ");
+                            System.out.println("Enter the 4-digit ID for the Product: ");
                             String newId = keyboard.nextLine();
 
-                            System.out.print("\nEnter the Product Name: ");
+                            System.out.println("Enter the Product Name: ");
                             String newName = keyboard.nextLine();
-                            System.out.print("\nEnter the Price: ");
+                            System.out.println("Enter the Price: ");
                             String newPrice = keyboard.nextLine();
 
                             System.out.printf("Adding: %s|%s|%s\n",newId,newName,newPrice);
@@ -83,29 +112,29 @@ public class SearchInventory {
                                     System.out.println("=== Adding Another Product ===");
                                     break;
                                 case "N":
+                                    System.out.println("== Saved! ==");
                                     buffWriter.close();
+                                    inventoryMap = loadInventory();
+                                    inventory = getInventory();
                                     another = false;
                                     break;
                             }
                         }
+                        buffWriter.close();
+
                         break;
                     //Exit
-                    case 5:
+                    case 6:
                         System.out.println("==========\nExiting, Have a Magical D-I-Y-Day!\n==========");
+                        keyboard.close();
                         System.exit(0);
                         break;
 
                 }
-                    System.out.println("===========\nPress [ENTER] to Continue\n===========");
-
-
-
-
-
+                    System.out.println("\n== Press [ENTER] to Continue ==");
+                    keyboard.nextLine();
 
                 //list all products
-
-
 
             }
 
@@ -117,6 +146,32 @@ public class SearchInventory {
 
 
 
+    }
+    public static HashMap<String,Product> loadInventory(){
+        HashMap<String, Product> inventory =new HashMap<String, Product>();
+        try {
+            FileReader fileReader = new FileReader("src/main/resources/inventory.csv");
+            BufferedReader buffReader = new BufferedReader(fileReader);
+            String input;
+            //process the file here
+            while ((input = buffReader.readLine()) != null) {
+                String[] item = input.split("\\|");
+                if (!item[0].equals("id")) { //I don't really need this for the current inventory list, but if a new csv is processed with categories it'd help
+                    int id = Integer.parseInt(item[0]);
+                    String name = item[1];
+                    double price = Double.parseDouble(item[2]);
+                    Product product = new Product(id,name,price);
+                    inventory.put(product.getName().toLowerCase(),product);
+                }
+            }
+            buffReader.close();
+        } catch (Exception e) {
+            System.out.println("Something broke in the loader method");
+            System.out.println(e.getMessage());
+
+        }
+
+        return inventory;
     }
     public static ArrayList<Product> getInventory(){
         ArrayList<Product> inventory =new ArrayList<Product>();
@@ -149,9 +204,10 @@ public class SearchInventory {
             if (product.getId() == idLookUp) {
                 Product found = new Product(product.getId(), product.getName(), product.getPrice());
                 System.out.printf("%d|%s|$%.2f\n", product.getId(), product.getName(), product.getPrice());
-                //return found;
             }
+
         }
+
 
     }
     public static void displayProduct(Product product) {

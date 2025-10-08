@@ -6,27 +6,73 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SearchInventory {
-    Scanner keyboard = new Scanner(System.in);
 
-    String input;
     public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+
+        String input;
         try {
             FileWriter fileWriter = new FileWriter("src/main/resources/inventory.csv",true); //we're going to append the file
             BufferedWriter buffWriter = new BufferedWriter(fileWriter);
 
 
             ArrayList<Product> inventory = getInventory();
+            System.out.println("== Welcome to Leomund's Tiny Hardware Hut! == ");
+            while(true) {
+                System.out.print("What would you like to do?\n[1] Display All Products\n[2] Product ID Look-Up\n[3] Search by Price Range\n[4] Add a New Product\n[5] Exit the Program\n======\nType Here: ");
+                int choice = keyboard.nextInt();
+                keyboard.nextLine(); //CRLF
 
-            //list all products
-            System.out.println("==== Current Inventory ====");
-            for (int i = 0; i < inventory.size(); i++) {
-                Product product = inventory.get(i);
-                System.out.printf("%d|%s|$%.2f\n",product.getId(),product.getName(),product.getPrice());
+                //let's switch!
+                switch(choice) {
+                    //display all
+                    case 1:
+                        System.out.println("==== Current Inventory ====");
+                        for (int i = 0; i < inventory.size(); i++) {
+                            Product product = inventory.get(i);
+                            System.out.printf("%d|%s|$%.2f\n", product.getId(), product.getName(), product.getPrice());
+                        }
+                        System.out.println("===========================");
+                        break;
+                    //ID Lookup
+                    case 2:
+                        System.out.println("=== Product Lookup by ID ===\nPlease enter ID: ");
+                        int idLookUp= keyboard.nextInt();
+                        keyboard.nextLine();//CRLF
+                        System.out.printf("Searching for %d...\n");
+
+                        if(idLookup(inventory,idLookUp)!= null) {
+                            System.out.printf("==== ID: %d ====", idLookUp);
+                            idLookup(inventory,idLookUp);
+                        }
+
+                        break;
+                    //Price Range
+                    case 3:
+
+                        break;
+                    //Add new
+                    case 4:
+                        break;
+                    //Exit
+                    case 5:
+                        System.out.println("==========\nExiting, Have a Magical D-I-Y-Day!\n==========");
+                        System.exit(0);
+                        break;
+
+                }
+                    System.out.println("===========\nPress [ENTER] to Continue\n===========");
+
+
+
+
+
+
+                //list all products
+
+
+
             }
-            System.out.println("===========================");
-
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +109,14 @@ public class SearchInventory {
 
         return inventory;
     }
-    public static void idLookup(ArrayList<Product> inventory){
+    public static Product idLookup(ArrayList<Product> inventory, int idLookUp){
+        for (Product product : inventory) {
+            if (product.getId() == idLookUp) {
+                Product found = new Product(product.getId(), product.getName(), product.getPrice());
+                System.out.printf("%d|%s|$%.2f\n", product.getId(), product.getName(), product.getPrice());
+                return found;
+            }
+        }
 
     }
 }

@@ -34,7 +34,9 @@ public class SearchInventoryMap {
                     case 1:
                         System.out.println("==== Current Inventory ====");
 
-                        System.out.println(inventory);
+                        for (Product product : inventory.values()) {
+                            displayProduct(product);
+                        }
                         System.out.println("===========================");
                         break;
                     //ID Lookup

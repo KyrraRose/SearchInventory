@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ed2355d-1fcb-4caf-a96e-f11aed19407d" name="Changes" comment="Initial Commit">
+    <list default="true" id="0ed2355d-1fcb-4caf-a96e-f11aed19407d" name="Changes" comment="We can print our humble inventory">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/inventory.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/SearchInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/SearchInventory.java" afterDir="false" />
     </list>
@@ -46,12 +48,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.SearchInventory.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Student\pluralsight\workbook-3\SearchInventory\src\main\resources" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -69,11 +77,23 @@
       <option name="project" value="LOCAL" />
       <updated>1759931716114</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="We can print our humble inventory">
+      <option name="closed" value="true" />
+      <created>1759932392147</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759932392147</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="We can print our humble inventory" />
+    <option name="LAST_COMMIT_MESSAGE" value="We can print our humble inventory" />
   </component>
 </project>

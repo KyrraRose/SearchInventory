@@ -19,8 +19,8 @@ public class SearchInventoryMap {
             BufferedWriter buffWriter = new BufferedWriter(fileWriter);
 
 
-            HashMap<String,Product> inventoryMap = loadInventory();
-            ArrayList<Product> inventory = getInventory();
+            HashMap<String,Product> inventory = loadInventory();
+
 
             System.out.println("== Welcome to Leomund's Tiny Hardware Hut! == ");
             while(true) {
@@ -34,10 +34,7 @@ public class SearchInventoryMap {
                     case 1:
                         System.out.println("==== Current Inventory ====");
 
-                        for (int i = 0; i < inventory.size(); i++) {
-                            Product product = inventory.get(i);
-                            displayProduct(product);
-                        }
+                        System.out.println(inventory);
                         System.out.println("===========================");
                         break;
                     //ID Lookup
@@ -57,8 +54,8 @@ public class SearchInventoryMap {
                             System.out.print("Please enter exact Product Name: ");
                             String nameLookUp= keyboard.nextLine().trim().toLowerCase();
                             System.out.printf("Searching for %s...\n",nameLookUp);
-                            if(inventoryMap.containsKey(nameLookUp)){
-                                displayProduct(inventoryMap.get(nameLookUp));
+                            if(inventory.containsKey(nameLookUp)){
+                                displayProduct(inventory.get(nameLookUp));
                             }
                             System.out.print("Do you want to search another product?\n[Y] Yes [N] No\nType Here: ");
                             String searchAgain = keyboard.nextLine().trim().toUpperCase();
@@ -114,8 +111,7 @@ public class SearchInventoryMap {
                                 case "N":
                                     System.out.println("== Saved! ==");
                                     buffWriter.close();
-                                    inventoryMap = loadInventory();
-                                    inventory = getInventory();
+                                    inventory = loadInventory();
                                     another = false;
                                     break;
                             }
@@ -173,34 +169,9 @@ public class SearchInventoryMap {
 
         return inventory;
     }
-    public static ArrayList<Product> getInventory(){
-        ArrayList<Product> inventory =new ArrayList<Product>();
-        try {
-            FileReader fileReader = new FileReader("src/main/resources/inventory.csv");
-            BufferedReader buffReader = new BufferedReader(fileReader);
-            String input;
-            //process the file here
-            while ((input = buffReader.readLine()) != null) {
-                String[] item = input.split("\\|");
-                if (!item[0].equals("id")) { //I don't really need this for the current inventory list, but if a new csv is processed with categories it'd help
-                    int id = Integer.parseInt(item[0]);
-                    String name = item[1];
-                    double price = Double.parseDouble(item[2]);
-                    Product product = new Product(id,name,price);
-                    inventory.add(product);
-                }
-            }
-            buffReader.close();
-        } catch (Exception e) {
-            System.out.println("Something broke in the method");
-            System.out.println(e.getMessage());
 
-        }
-
-        return inventory;
-    }
-    public static void idLookup(ArrayList<Product> inventory, int idLookUp){
-        for (Product product : inventory) {
+    public static void idLookup(HashMap<String, Product> inventory, int idLookUp){
+        for (Product product : inventory.values()) {
             if (product.getId() == idLookUp) {
                 Product found = new Product(product.getId(), product.getName(), product.getPrice());
                 System.out.printf("%d|%s|$%.2f\n", product.getId(), product.getName(), product.getPrice());
@@ -213,8 +184,8 @@ public class SearchInventoryMap {
     public static void displayProduct(Product product) {
         System.out.printf("%d|%s|$%.2f\n", product.getId(), product.getName(), product.getPrice());
     }
-    public static void searchProductByPriceRange(ArrayList<Product> inventory, double startRange, double endRange) {
-        for (Product product : inventory) {
+    public static void searchProductByPriceRange(HashMap<String, Product> inventory, double startRange, double endRange) {
+        for (Product product : inventory.values()) {
             if (startRange <= product.getPrice() && endRange >= product.getPrice()) {
                 displayProduct(product);
             }

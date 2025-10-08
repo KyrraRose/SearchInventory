@@ -92,15 +92,15 @@ public class SearchInventoryMap {
 
                         boolean another = true;
                         while (another) {
-                            System.out.println("Enter the 4-digit ID for the Product: ");
+                            System.out.print("Enter the 4-digit ID for the Product: ");
                             String newId = keyboard.nextLine();
 
-                            System.out.println("Enter the Product Name: ");
+                            System.out.print("\nEnter the Product Name: ");
                             String newName = keyboard.nextLine();
-                            System.out.println("Enter the Price: ");
+                            System.out.print("\nEnter the Price: ");
                             String newPrice = keyboard.nextLine();
 
-                            System.out.printf("Adding: %s|%s|%s\n",newId,newName,newPrice);
+                            System.out.printf("\nAdding: %s|%s|%s\n",newId,newName,newPrice);
                             buffWriter.newLine();
                             buffWriter.write(newId+"|"+newName+"|"+newPrice);
 

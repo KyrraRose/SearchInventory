@@ -63,7 +63,7 @@ public class SearchInventory {
 
                         boolean another = true;
                         while (another) {
-                            System.out.print("\nEnter the 4-digit ID for the Product: ");
+                            System.out.print("Enter the 4-digit ID for the Product: ");
                             String newId = keyboard.nextLine();
 
                             System.out.print("\nEnter the Product Name: ");
@@ -71,7 +71,7 @@ public class SearchInventory {
                             System.out.print("\nEnter the Price: ");
                             String newPrice = keyboard.nextLine();
 
-                            System.out.printf("Adding: %s|%s|%s\n",newId,newName,newPrice);
+                            System.out.printf("\nAdding: %s|%s|%s\n",newId,newName,newPrice);
                             buffWriter.newLine();
                             buffWriter.write(newId+"|"+newName+"|"+newPrice);
 
@@ -83,11 +83,15 @@ public class SearchInventory {
                                     System.out.println("=== Adding Another Product ===");
                                     break;
                                 case "N":
+                                    System.out.println("== Saved! ==");
                                     buffWriter.close();
+                                    inventory = getInventory();
                                     another = false;
                                     break;
                             }
                         }
+                        buffWriter.close();
+
                         break;
                     //Exit
                     case 5:
